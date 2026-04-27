@@ -1,0 +1,267 @@
+/* 
+Tint Library project - Made by: unlyx.xyz
+04-26-2026
+Version: 1.0.0
+*/
+
+#ifndef TINT_LIB_H
+#define TINT_LIB_H
+
+#include <stdarg.h>
+#include <stdint.h>
+#include <stdbool.h>
+#include <stdio.h>
+#include <string.h>
+
+/*
+======================
+==###DECLARATIONS###==
+======================
+*/
+
+typedef enum {
+    ESCAPE_CODE_OCTAL = 0,
+    ESCAPE_CODE_HEXADECIMAL = 2,
+} TL_EscapeCodesIndex;
+extern const char* const TL_EscapeCodes[];
+
+typedef enum {
+    CURSOR_CONTROL_HOME = 0,
+    CURSOR_CONTROL_LINE_COLUMN = 1,
+    CURSOR_CONTROL_UP = 2,
+    CURSOR_CONTROL_DOWN = 3,
+    CURSOR_CONTROL_RIGHT = 4,
+    CURSOR_CONTROL_LEFT = 5,
+    CURSOR_CONTROL_COLUMN = 6,
+} TL_CursorControlsIndex;
+extern const char* const TL_CursorControls[];
+
+typedef enum {
+    ERASE_FUNCTION_DISPLAY = 0,
+    ERASE_FUNCTION_CURSOR_END = 1,
+    ERASE_FUNCTION_CURSOR_BEGIN = 2,
+    ERASE_FUNCTION_SCREEN = 3,
+    ERASE_FUNCTION_LINE_CURSOR_END = 4,
+    ERASE_FUNCTION_LINE_CURSOR_BEGIN = 5,
+    ERASE_FUNCTION_LINE = 6,
+} TL_EraseFunctionsIndex;
+extern const char* const TL_EraseFunctions[];
+
+typedef enum {
+    GRAPHICS_MODE_RESET = 0,
+    GRAPHICS_MODE_BOLD = 1,
+    GRAPHICS_MODE_DIM = 2,
+    GRAPHICS_MODE_ITALIC = 3,
+    GRAPHICS_MODE_UNDERLINE = 4,
+    GRAPHICS_MODE_BLINKING = 5,
+    GRAPHICS_MODE_INVERSE = 6,
+    GRAPHICS_MODE_HIDDEN = 7,
+    GRAPHICS_MODE_STRIKETHROUGH = 8,
+} TL_GraphicModesIndex;
+typedef struct {
+    bool bold;
+    bool dim;
+    bool italic;
+    bool underline;
+    bool blinking;
+    bool inverse;
+    bool hidden;
+    bool strikethrough;
+} TL_GraphicModeConfig;
+extern const char* const TL_GraphicModes[];
+
+typedef enum {
+    COLOR_CODE_FG_BLACK = 0,
+    COLOR_CODE_FG_RED = 1,
+    COLOR_CODE_FG_GREEN = 2,
+    COLOR_CODE_FG_YELLOW = 3,
+    COLOR_CODE_FG_BLUE = 4,
+    COLOR_CODE_FG_MAGENTA = 5,
+    COLOR_CODE_FG_CYAN = 6,
+    COLOR_CODE_FG_WHITE = 7,
+    COLOR_CODE_FG_DEFAULT = 8,
+    COLOR_CODE_RESET = 9,
+    COLOR_CODE_FG_BRIGHT_BLACK = 10,
+    COLOR_CODE_FG_BRIGHT_RED = 11,
+    COLOR_CODE_FG_BRIGHT_GREEN = 12,
+    COLOR_CODE_FG_BRIGHT_YELLOW = 13,
+    COLOR_CODE_FG_BRIGHT_BLUE = 14,
+    COLOR_CODE_FG_BRIGHT_MAGENTA = 15,
+    COLOR_CODE_FG_BRIGHT_CYAN = 16,
+    COLOR_CODE_FG_BRIGHT_WHITE = 17,
+    COLOR_CODE_BG_BLACK = 18,
+    COLOR_CODE_BG_RED = 19,
+    COLOR_CODE_BG_GREEN = 20,
+    COLOR_CODE_BG_YELLOW = 21,
+    COLOR_CODE_BG_BLUE = 22,
+    COLOR_CODE_BG_MAGENTA = 23,
+    COLOR_CODE_BG_CYAN = 24,
+    COLOR_CODE_BG_WHITE = 25,
+    COLOR_CODE_BG_DEFAULT = 26,
+    COLOR_CODE_BG_BRIGHT_BLACK = 27,
+    COLOR_CODE_BG_BRIGHT_RED = 28,
+    COLOR_CODE_BG_BRIGHT_GREEN = 29,
+    COLOR_CODE_BG_BRIGHT_YELLOW = 30,
+    COLOR_CODE_BG_BRIGHT_BLUE = 31,
+    COLOR_CODE_BG_BRIGHT_MAGENTA = 32,
+    COLOR_CODE_BG_BRIGHT_CYAN = 33,
+    COLOR_CODE_BG_BRIGHT_WHITE = 34,
+} TL_IndexedColorsIndex;
+typedef struct {
+    TL_IndexedColorsIndex foreground;
+    TL_IndexedColorsIndex background;
+} TL_IndexedColorConfig;
+extern const char* const TL_IndexedColors[];
+
+typedef struct {
+    uint8_t foreground;
+    uint8_t background;
+} TL_8BitConfig;
+
+typedef struct {
+    uint8_t r;
+    uint8_t g;
+    uint8_t b;
+} TL_RGB;
+
+typedef struct {
+    TL_RGB foreground;
+    TL_RGB background;
+} TL_TruecolorConfig;
+
+typedef enum {
+    SEQUENCE_INDEXED,
+    SEQUENCE_8BIT,
+    SEQUENCE_TRUECOLOR,
+    SEQUENCE_JUST_GRAPHICS,
+} _tl_sequence_type;
+
+typedef struct {
+    TL_GraphicModeConfig graphics;
+    TL_IndexedColorConfig indexed;
+    TL_8BitConfig eight_bit;
+    TL_TruecolorConfig truecolor;
+} TL_Sequence;
+
+TL_Sequence TL_InitSeq(void);
+
+/*
+========================
+==###IMPLEMENTATION###==
+========================
+*/
+
+#ifdef TINT_LIB_IMPLEMENTATION
+
+#ifndef TINT_LIB_ESCAPE_CODE
+#define TINT_LIB_ESCAPE_CODE ESCAPE_CODE_OCTAL
+#endif
+
+const char* const TL_EscapeCodes[] = {"\033", "\x1B"};
+const char* const TL_CursorControls[] = {"H", "A", "B", "C", "D", "G"};
+const char* const TL_EraseFunctions[] = {"J", "0J", "1J", "2J", "0K", "1K", "2K"};
+const char* const TL_GraphicModes[] = {"0", "1", "2", "3", "4", "5", "7", "8", "9"};
+const char* const TL_IndexedColors[] = {"30", "31", "32", "33", "34", "35", "36", "37", "39", "0", "90", "91", "92", "93", "94", "95", "96", "97" "40", "41", "42", "43", "44", "45", "46", "47", "49", "100", "101", "102", "103", "104", "105", "106", "107"};
+
+TL_Sequence TL_InitSeq(void) {
+
+    TL_Sequence seq;
+
+    memset(&seq.graphics.bold, 0, sizeof(seq.graphics.bold));
+    memset(&seq.graphics.dim, 0, sizeof(seq.graphics.dim));
+    memset(&seq.graphics.italic, 0, sizeof(seq.graphics.italic));
+    memset(&seq.graphics.underline, 0, sizeof(seq.graphics.underline));
+    memset(&seq.graphics.blinking, 0, sizeof(seq.graphics.blinking));
+    memset(&seq.graphics.inverse, 0, sizeof(seq.graphics.inverse));
+    memset(&seq.graphics.hidden, 0, sizeof(seq.graphics.hidden));
+    memset(&seq.graphics.strikethrough, 0, sizeof(seq.graphics.strikethrough));
+    memset(&seq.graphics, 0, sizeof(seq.graphics));
+
+    memset(&seq.indexed.foreground, 0, sizeof(seq.indexed.foreground));
+    memset(&seq.indexed.background, 0, sizeof(seq.indexed.background));
+    memset(&seq.indexed, 0, sizeof(seq.indexed));
+
+    memset(&seq.eight_bit.foreground, 0, sizeof(seq.eight_bit.foreground));
+    memset(&seq.eight_bit.background, 0, sizeof(seq.eight_bit.background));
+    memset(&seq.eight_bit, 0, sizeof(seq.eight_bit));
+
+    memset(&seq.truecolor.foreground.r, 0, sizeof(seq.truecolor.foreground.r));
+    memset(&seq.truecolor.foreground.g, 0, sizeof(seq.truecolor.foreground.g));
+    memset(&seq.truecolor.foreground.b, 0, sizeof(seq.truecolor.foreground.b));
+    memset(&seq.truecolor.foreground, 0, sizeof(seq.truecolor.foreground));
+    memset(&seq.truecolor.background.r, 0, sizeof(seq.truecolor.background.r));
+    memset(&seq.truecolor.background.g, 0, sizeof(seq.truecolor.background.g));
+    memset(&seq.truecolor.background.b, 0, sizeof(seq.truecolor.background.b));
+    memset(&seq.truecolor.background, 0, sizeof(seq.truecolor.background));
+    memset(&seq.truecolor, 0, sizeof(seq.truecolor));
+
+    memset(&seq, 0, sizeof(seq));
+
+    return seq;
+
+};
+
+#define _apply_property(msg, property, presentation)\
+        do {\
+            if (property) {\
+                snprintf(msg + strlen(msg), sizeof(msg) - strlen(msg), "%s;", presentation);\
+            }\
+        } while(0)\
+
+static inline const char* _build_seq(FILE *stream, _tl_sequence_type type, TL_Sequence sequence, const char* fmt, ...) {
+
+    size_t msg_seq_len = 256;
+    char msg_seq[msg_seq_len];
+    memset(msg_seq, 0, msg_seq_len);
+
+    strcpy(msg_seq, TL_EscapeCodes[TINT_LIB_ESCAPE_CODE]);
+    strcat(msg_seq, "[");
+
+    _apply_property(msg_seq, sequence.graphics.bold, TL_GraphicModes[GRAPHICS_MODE_BOLD]);
+    _apply_property(msg_seq, sequence.graphics.dim, TL_GraphicModes[GRAPHICS_MODE_DIM]);
+    _apply_property(msg_seq, sequence.graphics.italic, TL_GraphicModes[GRAPHICS_MODE_ITALIC]);
+    _apply_property(msg_seq, sequence.graphics.underline, TL_GraphicModes[GRAPHICS_MODE_UNDERLINE]);
+    _apply_property(msg_seq, sequence.graphics.blinking, TL_GraphicModes[GRAPHICS_MODE_BLINKING]);
+    _apply_property(msg_seq, sequence.graphics.inverse, TL_GraphicModes[GRAPHICS_MODE_INVERSE]);
+    _apply_property(msg_seq, sequence.graphics.hidden, TL_GraphicModes[GRAPHICS_MODE_HIDDEN]);
+    _apply_property(msg_seq, sequence.graphics.strikethrough, TL_GraphicModes[GRAPHICS_MODE_STRIKETHROUGH]);
+
+    switch(type) {
+        case SEQUENCE_INDEXED:
+            snprintf(msg_seq + strlen(msg_seq), sizeof(msg_seq) - strlen(msg_seq), "%s;%s;m", TL_IndexedColors[sequence.indexed.foreground], TL_IndexedColors[sequence.indexed.background]);
+            break;
+        case SEQUENCE_8BIT:
+            snprintf(msg_seq + strlen(msg_seq), sizeof(msg_seq) - strlen(msg_seq), "38;5;%d;48;5;%d;m", sequence.eight_bit.foreground, sequence.eight_bit.background);
+            break;
+        case SEQUENCE_TRUECOLOR:
+            snprintf(msg_seq + strlen(msg_seq), sizeof(msg_seq) - strlen(msg_seq), "38;2;%d;%d;%d;48;2;%d;%d;%d;m", sequence.truecolor.foreground.r, sequence.truecolor.foreground.g, sequence.truecolor.foreground.b, 
+            sequence.truecolor.background.r, sequence.truecolor.background.g, sequence.truecolor.background.b);
+            break;
+        case SEQUENCE_JUST_GRAPHICS:
+            strcat(msg_seq, "m");
+            break;
+    }
+
+    char msg[2048] = {0};
+    snprintf(msg, sizeof(msg), "%s%s%s[0m", msg_seq, fmt, TL_EscapeCodes[TINT_LIB_ESCAPE_CODE]);
+
+    va_list args;
+    va_start(args, fmt);
+    vfprintf(stream, msg, args);
+    va_end(args);
+
+};
+
+#define TL_IndexedPrintf(sequence, ...) _build_seq(stdout, SEQUENCE_INDEXED, sequence, ##__VA_ARGS__)
+#define TL_8BitPrintf(sequence, ...) _build_seq(stdout, SEQUENCE_8BIT, sequence, ##__VA_ARGS__)
+#define TL_TruecolorPrintf(sequence, ...) _build_seq(stdout, SEQUENCE_TRUECOLOR, sequence, ##__VA_ARGS__)
+#define TL_GraphicsPrintf(sequence, ...) _build_seq(stdout, SEQUENCE_JUST_GRAPHICS, sequence, ##__VA_ARGS__)
+
+#define TL_IndexedfPrintf(stream, sequence, ...) _build_seq(stream, SEQUENCE_INDEXED, sequence, ##__VA_ARGS__)
+#define TL_8BitfPrintf(stream, sequence, ...) _build_seq(stream, SEQUENCE_8BIT, sequence, ##__VA_ARGS__)
+#define TL_TruecolorfPrintf(stream, sequence, ...) _build_seq(stream, SEQUENCE_TRUECOLOR, sequence, ##__VA_ARGS__)
+#define TL_GraphicsfPrintf(stream, sequence, ...) _build_seq(stream, SEQUENCE_TRUECOLOR, sequence, ##__VA_ARGS__)
+
+#endif
+
+#endif
