@@ -26,37 +26,37 @@ typedef enum {
 extern const char* const TL_EscapeCodes[];
 
 typedef enum {
-    CURSOR_CONTROL_HOME = 0,
-    CURSOR_CONTROL_LINE_COLUMN = 1,
-    CURSOR_CONTROL_UP = 2,
-    CURSOR_CONTROL_DOWN = 3,
-    CURSOR_CONTROL_RIGHT = 4,
-    CURSOR_CONTROL_LEFT = 5,
-    CURSOR_CONTROL_COLUMN = 6,
+    TL_CURSOR_CONTROL_HOME = 0,
+    TL_CURSOR_CONTROL_LINE_COLUMN = 1,
+    TL_CURSOR_CONTROL_UP = 2,
+    TL_CURSOR_CONTROL_DOWN = 3,
+    TL_CURSOR_CONTROL_RIGHT = 4,
+    TL_CURSOR_CONTROL_LEFT = 5,
+    TL_CURSOR_CONTROL_COLUMN = 6,
 } TL_CursorControlsIndex;
 extern const char* const TL_CursorControls[];
 
 typedef enum {
-    ERASE_FUNCTION_DISPLAY = 0,
-    ERASE_FUNCTION_CURSOR_END = 1,
-    ERASE_FUNCTION_CURSOR_BEGIN = 2,
-    ERASE_FUNCTION_SCREEN = 3,
-    ERASE_FUNCTION_LINE_CURSOR_END = 4,
-    ERASE_FUNCTION_LINE_CURSOR_BEGIN = 5,
-    ERASE_FUNCTION_LINE = 6,
+    TL_ERASE_FUNCTION_DISPLAY = 0,
+    TL_ERASE_FUNCTION_CURSOR_END = 1,
+    TL_ERASE_FUNCTION_CURSOR_BEGIN = 2,
+    TL_ERASE_FUNCTION_SCREEN = 3,
+    TL_ERASE_FUNCTION_LINE_CURSOR_END = 4,
+    TL_ERASE_FUNCTION_LINE_CURSOR_BEGIN = 5,
+    TL_ERASE_FUNCTION_LINE = 6,
 } TL_EraseFunctionsIndex;
 extern const char* const TL_EraseFunctions[];
 
 typedef enum {
-    GRAPHICS_MODE_RESET = 0,
-    GRAPHICS_MODE_BOLD = 1,
-    GRAPHICS_MODE_DIM = 2,
-    GRAPHICS_MODE_ITALIC = 3,
-    GRAPHICS_MODE_UNDERLINE = 4,
-    GRAPHICS_MODE_BLINKING = 5,
-    GRAPHICS_MODE_INVERSE = 6,
-    GRAPHICS_MODE_HIDDEN = 7,
-    GRAPHICS_MODE_STRIKETHROUGH = 8,
+    TL_GRAPHICS_MODE_RESET = 0,
+    TL_GRAPHICS_MODE_BOLD = 1,
+    TL_GRAPHICS_MODE_DIM = 2,
+    TL_GRAPHICS_MODE_ITALIC = 3,
+    TL_GRAPHICS_MODE_UNDERLINE = 4,
+    TL_GRAPHICS_MODE_BLINKING = 5,
+    TL_GRAPHICS_MODE_INVERSE = 6,
+    TL_GRAPHICS_MODE_HIDDEN = 7,
+    TL_GRAPHICS_MODE_STRIKETHROUGH = 8,
 } TL_GraphicModesIndex;
 typedef struct {
     bool bold;
@@ -71,41 +71,41 @@ typedef struct {
 extern const char* const TL_GraphicModes[];
 
 typedef enum {
-    COLOR_CODE_FG_BLACK = 0,
-    COLOR_CODE_FG_RED = 1,
-    COLOR_CODE_FG_GREEN = 2,
-    COLOR_CODE_FG_YELLOW = 3,
-    COLOR_CODE_FG_BLUE = 4,
-    COLOR_CODE_FG_MAGENTA = 5,
-    COLOR_CODE_FG_CYAN = 6,
-    COLOR_CODE_FG_WHITE = 7,
-    COLOR_CODE_FG_DEFAULT = 8,
-    COLOR_CODE_RESET = 9,
-    COLOR_CODE_FG_BRIGHT_BLACK = 10,
-    COLOR_CODE_FG_BRIGHT_RED = 11,
-    COLOR_CODE_FG_BRIGHT_GREEN = 12,
-    COLOR_CODE_FG_BRIGHT_YELLOW = 13,
-    COLOR_CODE_FG_BRIGHT_BLUE = 14,
-    COLOR_CODE_FG_BRIGHT_MAGENTA = 15,
-    COLOR_CODE_FG_BRIGHT_CYAN = 16,
-    COLOR_CODE_FG_BRIGHT_WHITE = 17,
-    COLOR_CODE_BG_BLACK = 18,
-    COLOR_CODE_BG_RED = 19,
-    COLOR_CODE_BG_GREEN = 20,
-    COLOR_CODE_BG_YELLOW = 21,
-    COLOR_CODE_BG_BLUE = 22,
-    COLOR_CODE_BG_MAGENTA = 23,
-    COLOR_CODE_BG_CYAN = 24,
-    COLOR_CODE_BG_WHITE = 25,
-    COLOR_CODE_BG_DEFAULT = 26,
-    COLOR_CODE_BG_BRIGHT_BLACK = 27,
-    COLOR_CODE_BG_BRIGHT_RED = 28,
-    COLOR_CODE_BG_BRIGHT_GREEN = 29,
-    COLOR_CODE_BG_BRIGHT_YELLOW = 30,
-    COLOR_CODE_BG_BRIGHT_BLUE = 31,
-    COLOR_CODE_BG_BRIGHT_MAGENTA = 32,
-    COLOR_CODE_BG_BRIGHT_CYAN = 33,
-    COLOR_CODE_BG_BRIGHT_WHITE = 34,
+    TL_COLOR_CODE_FG_BLACK = 0,
+    TL_COLOR_CODE_FG_RED = 1,
+    TL_COLOR_CODE_FG_GREEN = 2,
+    TL_COLOR_CODE_FG_YELLOW = 3,
+    TL_COLOR_CODE_FG_BLUE = 4,
+    TL_COLOR_CODE_FG_MAGENTA = 5,
+    TL_COLOR_CODE_FG_CYAN = 6,
+    TL_COLOR_CODE_FG_WHITE = 7,
+    TL_COLOR_CODE_FG_DEFAULT = 8,
+    TL_COLOR_CODE_RESET = 9,
+    TL_COLOR_CODE_FG_BRIGHT_BLACK = 10,
+    TL_COLOR_CODE_FG_BRIGHT_RED = 11,
+    TL_COLOR_CODE_FG_BRIGHT_GREEN = 12,
+    TL_COLOR_CODE_FG_BRIGHT_YELLOW = 13,
+    TL_COLOR_CODE_FG_BRIGHT_BLUE = 14,
+    TL_COLOR_CODE_FG_BRIGHT_MAGENTA = 15,
+    TL_COLOR_CODE_FG_BRIGHT_CYAN = 16,
+    TL_COLOR_CODE_FG_BRIGHT_WHITE = 17,
+    TL_COLOR_CODE_BG_BLACK = 18,
+    TL_COLOR_CODE_BG_RED = 19,
+    TL_COLOR_CODE_BG_GREEN = 20,
+    TL_COLOR_CODE_BG_YELLOW = 21,
+    TL_COLOR_CODE_BG_BLUE = 22,
+    TL_COLOR_CODE_BG_MAGENTA = 23,
+    TL_COLOR_CODE_BG_CYAN = 24,
+    TL_COLOR_CODE_BG_WHITE = 25,
+    TL_COLOR_CODE_BG_DEFAULT = 26,
+    TL_COLOR_CODE_BG_BRIGHT_BLACK = 27,
+    TL_COLOR_CODE_BG_BRIGHT_RED = 28,
+    TL_COLOR_CODE_BG_BRIGHT_GREEN = 29,
+    TL_COLOR_CODE_BG_BRIGHT_YELLOW = 30,
+    TL_COLOR_CODE_BG_BRIGHT_BLUE = 31,
+    TL_COLOR_CODE_BG_BRIGHT_MAGENTA = 32,
+    TL_COLOR_CODE_BG_BRIGHT_CYAN = 33,
+    TL_COLOR_CODE_BG_BRIGHT_WHITE = 34,
 } TL_IndexedColorsIndex;
 typedef struct {
     TL_IndexedColorsIndex foreground;
@@ -217,14 +217,14 @@ static inline const char* _build_seq(FILE *stream, _tl_sequence_type type, TL_Se
     strcpy(msg_seq, TL_EscapeCodes[TINT_LIB_ESCAPE_CODE]);
     strcat(msg_seq, "[");
 
-    _apply_property(msg_seq, sequence.graphics.bold, TL_GraphicModes[GRAPHICS_MODE_BOLD]);
-    _apply_property(msg_seq, sequence.graphics.dim, TL_GraphicModes[GRAPHICS_MODE_DIM]);
-    _apply_property(msg_seq, sequence.graphics.italic, TL_GraphicModes[GRAPHICS_MODE_ITALIC]);
-    _apply_property(msg_seq, sequence.graphics.underline, TL_GraphicModes[GRAPHICS_MODE_UNDERLINE]);
-    _apply_property(msg_seq, sequence.graphics.blinking, TL_GraphicModes[GRAPHICS_MODE_BLINKING]);
-    _apply_property(msg_seq, sequence.graphics.inverse, TL_GraphicModes[GRAPHICS_MODE_INVERSE]);
-    _apply_property(msg_seq, sequence.graphics.hidden, TL_GraphicModes[GRAPHICS_MODE_HIDDEN]);
-    _apply_property(msg_seq, sequence.graphics.strikethrough, TL_GraphicModes[GRAPHICS_MODE_STRIKETHROUGH]);
+    _apply_property(msg_seq, sequence.graphics.bold, TL_GraphicModes[TL_GRAPHICS_MODE_BOLD]);
+    _apply_property(msg_seq, sequence.graphics.dim, TL_GraphicModes[TL_GRAPHICS_MODE_DIM]);
+    _apply_property(msg_seq, sequence.graphics.italic, TL_GraphicModes[TL_GRAPHICS_MODE_ITALIC]);
+    _apply_property(msg_seq, sequence.graphics.underline, TL_GraphicModes[TL_GRAPHICS_MODE_UNDERLINE]);
+    _apply_property(msg_seq, sequence.graphics.blinking, TL_GraphicModes[TL_GRAPHICS_MODE_BLINKING]);
+    _apply_property(msg_seq, sequence.graphics.inverse, TL_GraphicModes[TL_GRAPHICS_MODE_INVERSE]);
+    _apply_property(msg_seq, sequence.graphics.hidden, TL_GraphicModes[TL_GRAPHICS_MODE_HIDDEN]);
+    _apply_property(msg_seq, sequence.graphics.strikethrough, TL_GraphicModes[TL_GRAPHICS_MODE_STRIKETHROUGH]);
 
     switch(type) {
         case SEQUENCE_INDEXED:
