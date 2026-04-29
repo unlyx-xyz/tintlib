@@ -231,14 +231,14 @@ static inline const char* _build_seq(FILE *stream, _tl_sequence_type type, TL_Se
 
     switch(type) {
         case SEQUENCE_INDEXED:
-            snprintf(msg_seq + strlen(msg_seq), sizeof(msg_seq) - strlen(msg_seq), "%s;%s;m", TL_IndexedColors[sequence.indexed.foreground], TL_IndexedColors[sequence.indexed.background]);
+            snprintf(msg_seq + strlen(msg_seq), sizeof(msg_seq) - strlen(msg_seq), "%s;%s;", TL_IndexedColors[sequence.indexed.foreground], TL_IndexedColors[sequence.indexed.background]);
             break;
         case SEQUENCE_8BIT:
             if(sequence.eight_bit.foreground >= 0) {
                 snprintf(msg_seq + strlen(msg_seq), sizeof(msg_seq) - strlen(msg_seq), "38;5;%d;", sequence.eight_bit.foreground);
             }
             if(sequence.eight_bit.background >= 0) {
-                snprintf(msg_seq + strlen(msg_seq), sizeof(msg_seq) - strlen(msg_seq), "48;5;%d;m", sequence.eight_bit.background);
+                snprintf(msg_seq + strlen(msg_seq), sizeof(msg_seq) - strlen(msg_seq), "48;5;%d;", sequence.eight_bit.background);
             }
             break;
         case SEQUENCE_TRUECOLOR:
@@ -246,13 +246,14 @@ static inline const char* _build_seq(FILE *stream, _tl_sequence_type type, TL_Se
                 snprintf(msg_seq + strlen(msg_seq), sizeof(msg_seq) - strlen(msg_seq), "38;2;%d;%d;%d;", sequence.truecolor.foreground.r, sequence.truecolor.foreground.g, sequence.truecolor.foreground.b); 
             }
             if(sequence.truecolor.background.enable) {
-                snprintf(msg_seq + strlen(msg_seq), sizeof(msg_seq) - strlen(msg_seq), "48;2;%d;%d;%d;m", sequence.truecolor.background.r, sequence.truecolor.background.g, sequence.truecolor.background.b);
+                snprintf(msg_seq + strlen(msg_seq), sizeof(msg_seq) - strlen(msg_seq), "48;2;%d;%d;%d;", sequence.truecolor.background.r, sequence.truecolor.background.g, sequence.truecolor.background.b);
             }
             break;
         case SEQUENCE_JUST_GRAPHICS:
-            strcat(msg_seq, "m");
             break;
     }
+
+    strcat(msg_seq, "m");
 
     char msg[2048] = {0};
     snprintf(msg, sizeof(msg), "%s%s%s[0m", msg_seq, fmt, TL_EscapeCodes[TINT_LIB_ESCAPE_CODE]);
