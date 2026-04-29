@@ -114,11 +114,12 @@ typedef struct {
 extern const char* const TL_IndexedColors[];
 
 typedef struct {
-    uint8_t foreground;
-    uint8_t background;
+    int foreground;
+    int background;
 } TL_8BitConfig;
 
 typedef struct {
+    bool enable;
     uint8_t r;
     uint8_t g;
     uint8_t b;
@@ -188,10 +189,12 @@ TL_Sequence TL_InitSeq(void) {
     memset(&seq.truecolor.foreground.r, 0, sizeof(seq.truecolor.foreground.r));
     memset(&seq.truecolor.foreground.g, 0, sizeof(seq.truecolor.foreground.g));
     memset(&seq.truecolor.foreground.b, 0, sizeof(seq.truecolor.foreground.b));
+    memset(&seq.truecolor.foreground.enable, 0, sizeof(seq.truecolor.foreground.enable));
     memset(&seq.truecolor.foreground, 0, sizeof(seq.truecolor.foreground));
     memset(&seq.truecolor.background.r, 0, sizeof(seq.truecolor.background.r));
     memset(&seq.truecolor.background.g, 0, sizeof(seq.truecolor.background.g));
     memset(&seq.truecolor.background.b, 0, sizeof(seq.truecolor.background.b));
+    memset(&seq.truecolor.background.enable, 0, sizeof(seq.truecolor.background.enable));
     memset(&seq.truecolor.background, 0, sizeof(seq.truecolor.background));
     memset(&seq.truecolor, 0, sizeof(seq.truecolor));
 
@@ -231,11 +234,20 @@ static inline const char* _build_seq(FILE *stream, _tl_sequence_type type, TL_Se
             snprintf(msg_seq + strlen(msg_seq), sizeof(msg_seq) - strlen(msg_seq), "%s;%s;m", TL_IndexedColors[sequence.indexed.foreground], TL_IndexedColors[sequence.indexed.background]);
             break;
         case SEQUENCE_8BIT:
-            snprintf(msg_seq + strlen(msg_seq), sizeof(msg_seq) - strlen(msg_seq), "38;5;%d;48;5;%d;m", sequence.eight_bit.foreground, sequence.eight_bit.background);
+            if(sequence.eight_bit.foreground >= 0) {
+                snprintf(msg_seq + strlen(msg_seq), sizeof(msg_seq) - strlen(msg_seq), "38;5;%d;", sequence.eight_bit.foreground);
+            }
+            if(sequence.eight_bit.background >= 0) {
+                snprintf(msg_seq + strlen(msg_seq), sizeof(msg_seq) - strlen(msg_seq), "48;5;%d;m", sequence.eight_bit.background);
+            }
             break;
         case SEQUENCE_TRUECOLOR:
-            snprintf(msg_seq + strlen(msg_seq), sizeof(msg_seq) - strlen(msg_seq), "38;2;%d;%d;%d;48;2;%d;%d;%d;m", sequence.truecolor.foreground.r, sequence.truecolor.foreground.g, sequence.truecolor.foreground.b, 
-            sequence.truecolor.background.r, sequence.truecolor.background.g, sequence.truecolor.background.b);
+            if(sequence.truecolor.foreground.enable) {
+                snprintf(msg_seq + strlen(msg_seq), sizeof(msg_seq) - strlen(msg_seq), "38;2;%d;%d;%d;", sequence.truecolor.foreground.r, sequence.truecolor.foreground.g, sequence.truecolor.foreground.b); 
+            }
+            if(sequence.truecolor.background.enable) {
+                snprintf(msg_seq + strlen(msg_seq), sizeof(msg_seq) - strlen(msg_seq), "48;2;%d;%d;%d;m", sequence.truecolor.background.r, sequence.truecolor.background.g, sequence.truecolor.background.b);
+            }
             break;
         case SEQUENCE_JUST_GRAPHICS:
             strcat(msg_seq, "m");
