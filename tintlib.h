@@ -131,10 +131,10 @@ typedef struct {
 } TL_TruecolorConfig;
 
 typedef enum {
-    SEQUENCE_INDEXED,
-    SEQUENCE_8BIT,
-    SEQUENCE_TRUECOLOR,
-    SEQUENCE_JUST_GRAPHICS,
+    SEQUENCE_INDEXED = 0,
+    SEQUENCE_8BIT = 1,
+    SEQUENCE_TRUECOLOR = 2,
+    SEQUENCE_JUST_GRAPHICS = 3,
 } _tl_sequence_type;
 
 typedef struct {
@@ -274,6 +274,37 @@ static inline const char* _build_seq(FILE *stream, _tl_sequence_type type, TL_Se
 #define TL_8BitfPrintf(stream, sequence, ...) _build_seq(stream, SEQUENCE_8BIT, sequence, ##__VA_ARGS__)
 #define TL_TruecolorfPrintf(stream, sequence, ...) _build_seq(stream, SEQUENCE_TRUECOLOR, sequence, ##__VA_ARGS__)
 #define TL_GraphicsfPrintf(stream, sequence, ...) _build_seq(stream, SEQUENCE_TRUECOLOR, sequence, ##__VA_ARGS__)
+
+void _tl_copy_sequence(int type, TL_Sequence src, TL_Sequence *dest) {
+    
+    switch (type) {
+        case -1:
+            dest->graphics = src.graphics;
+            dest->indexed = src.indexed;
+            dest->eight_bit = src.eight_bit;
+            dest->truecolor = src.truecolor;
+            break;
+        case SEQUENCE_INDEXED:
+            dest->indexed = src.indexed;
+            break;
+        case SEQUENCE_8BIT:
+            dest->eight_bit = src.eight_bit;
+            break;
+        case SEQUENCE_TRUECOLOR:
+            dest->truecolor = src.truecolor;
+            break;
+        case SEQUENCE_JUST_GRAPHICS:
+            dest->graphics = src.graphics;
+            break;
+    } 
+
+};
+
+#define TL_CopySequence(src, dest) _tl_copy_sequence(-1, src, dest)
+#define TL_CopyIndexed(src, dest) _tl_copy_sequence(SEQUENCE_INDEXED, src, dest)
+#define TL_Copy8bit(src, dest) _tl_copy_sequence(SEQUENCE_8BIT, src, dest)
+#define TL_CopyTruecolor(src, dest) _tl_copy_sequence(SEQUENCE_TRUECOLOR, src, dest)
+#define TL_CopyGraphics(src, dest) _tl_copy_sequence(SEQUENCE_GRAPHICS, src, dest)
 
 #endif
 
