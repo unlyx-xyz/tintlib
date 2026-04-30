@@ -304,7 +304,7 @@ void _tl_copy_sequence(int type, TL_Sequence src, TL_Sequence *dest) {
 #define TL_CopyIndexed(src, dest) _tl_copy_sequence(SEQUENCE_INDEXED, src, dest)
 #define TL_Copy8bit(src, dest) _tl_copy_sequence(SEQUENCE_8BIT, src, dest)
 #define TL_CopyTruecolor(src, dest) _tl_copy_sequence(SEQUENCE_TRUECOLOR, src, dest)
-#define TL_CopyGraphics(src, dest) _tl_copy_sequence(SEQUENCE_GRAPHICS, src, dest)
+#define TL_CopyGraphics(src, dest) _tl_copy_sequence(SEQUENCE_JUST_GRAPHICS, src, dest)
 
 #endif
 
