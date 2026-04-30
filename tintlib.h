@@ -144,7 +144,7 @@ typedef struct {
     TL_TruecolorConfig truecolor;
 } TL_Sequence;
 
-TL_Sequence TL_InitSeq(void);
+TL_Sequence TL_InitSequence(void);
 
 /*
 ========================
@@ -164,7 +164,7 @@ const char* const TL_EraseFunctions[] = {"J", "0J", "1J", "2J", "0K", "1K", "2K"
 const char* const TL_GraphicModes[] = {"0", "1", "2", "3", "4", "5", "7", "8", "9"};
 const char* const TL_IndexedColors[] = {"30", "31", "32", "33", "34", "35", "36", "37", "39", "0", "90", "91", "92", "93", "94", "95", "96", "97" "40", "41", "42", "43", "44", "45", "46", "47", "49", "100", "101", "102", "103", "104", "105", "106", "107"};
 
-TL_Sequence TL_InitSeq(void) {
+TL_Sequence TL_InitSequence(void) {
 
     TL_Sequence seq;
 
@@ -211,7 +211,7 @@ TL_Sequence TL_InitSeq(void) {
             }\
         } while(0)\
 
-static inline const char* _build_seq(FILE *stream, _tl_sequence_type type, TL_Sequence sequence, const char* fmt, ...) {
+static inline const char* _tl_build_sequence(FILE *stream, _tl_sequence_type type, TL_Sequence sequence, const char* fmt, ...) {
 
     size_t msg_seq_len = 256;
     char msg_seq[msg_seq_len];
@@ -265,15 +265,15 @@ static inline const char* _build_seq(FILE *stream, _tl_sequence_type type, TL_Se
 
 };
 
-#define TL_IndexedPrintf(sequence, ...) _build_seq(stdout, SEQUENCE_INDEXED, sequence, ##__VA_ARGS__)
-#define TL_8BitPrintf(sequence, ...) _build_seq(stdout, SEQUENCE_8BIT, sequence, ##__VA_ARGS__)
-#define TL_TruecolorPrintf(sequence, ...) _build_seq(stdout, SEQUENCE_TRUECOLOR, sequence, ##__VA_ARGS__)
-#define TL_GraphicsPrintf(sequence, ...) _build_seq(stdout, SEQUENCE_JUST_GRAPHICS, sequence, ##__VA_ARGS__)
+#define TL_IndexedPrintf(sequence, ...) _tl_build_sequence(stdout, SEQUENCE_INDEXED, sequence, ##__VA_ARGS__)
+#define TL_8BitPrintf(sequence, ...) _tl_build_sequence(stdout, SEQUENCE_8BIT, sequence, ##__VA_ARGS__)
+#define TL_TruecolorPrintf(sequence, ...) _tl_build_sequence(stdout, SEQUENCE_TRUECOLOR, sequence, ##__VA_ARGS__)
+#define TL_GraphicsPrintf(sequence, ...) _tl_build_sequence(stdout, SEQUENCE_JUST_GRAPHICS, sequence, ##__VA_ARGS__)
 
-#define TL_IndexedfPrintf(stream, sequence, ...) _build_seq(stream, SEQUENCE_INDEXED, sequence, ##__VA_ARGS__)
-#define TL_8BitfPrintf(stream, sequence, ...) _build_seq(stream, SEQUENCE_8BIT, sequence, ##__VA_ARGS__)
-#define TL_TruecolorfPrintf(stream, sequence, ...) _build_seq(stream, SEQUENCE_TRUECOLOR, sequence, ##__VA_ARGS__)
-#define TL_GraphicsfPrintf(stream, sequence, ...) _build_seq(stream, SEQUENCE_TRUECOLOR, sequence, ##__VA_ARGS__)
+#define TL_IndexedfPrintf(stream, sequence, ...) _tl_build_sequence(stream, SEQUENCE_INDEXED, sequence, ##__VA_ARGS__)
+#define TL_8BitfPrintf(stream, sequence, ...) _tl_build_sequence(stream, SEQUENCE_8BIT, sequence, ##__VA_ARGS__)
+#define TL_TruecolorfPrintf(stream, sequence, ...) _tl_build_sequence(stream, SEQUENCE_TRUECOLOR, sequence, ##__VA_ARGS__)
+#define TL_GraphicsfPrintf(stream, sequence, ...) _tl_build_sequence(stream, SEQUENCE_TRUECOLOR, sequence, ##__VA_ARGS__)
 
 void _tl_copy_sequence(int type, TL_Sequence src, TL_Sequence *dest) {
     
