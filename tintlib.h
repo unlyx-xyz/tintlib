@@ -211,7 +211,7 @@ TL_Sequence TL_InitSequence(void) {
             }\
         } while(0)\
 
-static inline const char* _tl_build_sequence(FILE *stream, _tl_sequence_type type, TL_Sequence sequence, const char* fmt, ...) {
+static inline int _tl_build_sequence(FILE *stream, _tl_sequence_type type, TL_Sequence sequence, const char* fmt, ...) {
 
     size_t msg_seq_len = 256;
     char msg_seq[msg_seq_len];
@@ -260,8 +260,10 @@ static inline const char* _tl_build_sequence(FILE *stream, _tl_sequence_type typ
 
     va_list args;
     va_start(args, fmt);
-    vfprintf(stream, msg, args);
+    int bytes_printed = vfprintf(stream, msg, args);
     va_end(args);
+
+    return bytes_printed;
 
 };
 
