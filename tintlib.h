@@ -203,12 +203,12 @@ static inline int _tl_build_sequence(FILE *stream, _tl_sequence_type type, TL_Se
 #define TL_printfc3bit4bit(sequence, ...) _tl_build_sequence(stdout, ANSI_C1_CSI_SGR_3BIT4BIT, sequence, ##__VA_ARGS__)
 #define TL_printfc8bit(sequence, ...) _tl_build_sequence(stdout, ANSI_C1_CSI_SGR_8BIT, sequence, ##__VA_ARGS__)
 #define TL_printfcTruecolor(sequence, ...) _tl_build_sequence(stdout, ANSI_C1_CSI_SGR_TRUECOLOR, sequence, ##__VA_ARGS__)
-#define TL_printfcDa(sequence, ...) _tl_build_sequence(stdout, ANSI_C1_CSI_SGR_DISPLAYATTRIBUTES, sequence, ##__VA_ARGS__)
+#define TL_printfDa(sequence, ...) _tl_build_sequence(stdout, ANSI_C1_CSI_SGR_DISPLAYATTRIBUTES, sequence, ##__VA_ARGS__)
 
 #define TL_fprintfc3bit4bit(stream, sequence, ...) _tl_build_sequence(stream, ANSI_C1_CSI_SGR_3BIT4BIT, sequence, ##__VA_ARGS__)
 #define TL_fprintfc8bit(stream, sequence, ...) _tl_build_sequence(stream, ANSI_C1_CSI_SGR_8BIT, sequence, ##__VA_ARGS__)
 #define TL_fprintfcTruecolor(stream, sequence, ...) _tl_build_sequence(stream, ANSI_C1_CSI_SGR_TRUECOLOR, sequence, ##__VA_ARGS__)
-#define TL_fprintfcDa(stream, sequence, ...) _tl_build_sequence(stream, ANSI_C1_CSI_SGR_DISPLAYATTRIBUTES, sequence, ##__VA_ARGS__)
+#define TL_fprintfDa(stream, sequence, ...) _tl_build_sequence(stream, ANSI_C1_CSI_SGR_DISPLAYATTRIBUTES, sequence, ##__VA_ARGS__)
 
 void _tl_copy_sequence(int type, TL_Sequence src, TL_Sequence *dest) {
     
