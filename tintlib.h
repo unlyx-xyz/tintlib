@@ -121,8 +121,6 @@ typedef struct {
     TL_SGRColorsTruecolor ctruecolor;
 } TL_Sequence;
 
-TL_Sequence TL_InitSequence(void);
-
 /*
 ========================
 ==###IMPLEMENTATION###==
@@ -138,46 +136,6 @@ TL_Sequence TL_InitSequence(void);
 const char* const TL_ANSIC0ESC[] = {"\033", "\x1B"};
 const char* const TL_SGRDisplayAttributesPS[] = {"0", "1", "2", "3", "4", "5", "7", "8", "9"};
 const char* const TL_SGRColors3Bit4BitPS[] = {"30", "31", "32", "33", "34", "35", "36", "37", "39", "40", "41", "42", "43", "44", "45", "46", "47", "49", "90" "91", "92", "93", "94", "95", "96", "97", "100", "101", "102", "103", "104", "105", "106", "107"};
-
-TL_Sequence TL_InitSequence(void) {
-
-    TL_Sequence seq;
-
-    memset(&seq.graphics.bold, 0, sizeof(seq.graphics.bold));
-    memset(&seq.graphics.dim, 0, sizeof(seq.graphics.dim));
-    memset(&seq.graphics.italic, 0, sizeof(seq.graphics.italic));
-    memset(&seq.graphics.underline, 0, sizeof(seq.graphics.underline));
-    memset(&seq.graphics.blinking, 0, sizeof(seq.graphics.blinking));
-    memset(&seq.graphics.inverse, 0, sizeof(seq.graphics.inverse));
-    memset(&seq.graphics.hidden, 0, sizeof(seq.graphics.hidden));
-    memset(&seq.graphics.strikethrough, 0, sizeof(seq.graphics.strikethrough));
-    memset(&seq.graphics, 0, sizeof(seq.graphics));
-
-    memset(&seq.indexed.foreground, 0, sizeof(seq.indexed.foreground));
-    memset(&seq.indexed.background, 0, sizeof(seq.indexed.background));
-    memset(&seq.indexed, 0, sizeof(seq.indexed));
-
-    memset(&seq.eight_bit.foreground, 0, sizeof(seq.eight_bit.foreground));
-    memset(&seq.eight_bit.background, 0, sizeof(seq.eight_bit.background));
-    memset(&seq.eight_bit, 0, sizeof(seq.eight_bit));
-
-    memset(&seq.truecolor.foreground.r, 0, sizeof(seq.truecolor.foreground.r));
-    memset(&seq.truecolor.foreground.g, 0, sizeof(seq.truecolor.foreground.g));
-    memset(&seq.truecolor.foreground.b, 0, sizeof(seq.truecolor.foreground.b));
-    memset(&seq.truecolor.foreground.enable, 0, sizeof(seq.truecolor.foreground.enable));
-    memset(&seq.truecolor.foreground, 0, sizeof(seq.truecolor.foreground));
-    memset(&seq.truecolor.background.r, 0, sizeof(seq.truecolor.background.r));
-    memset(&seq.truecolor.background.g, 0, sizeof(seq.truecolor.background.g));
-    memset(&seq.truecolor.background.b, 0, sizeof(seq.truecolor.background.b));
-    memset(&seq.truecolor.background.enable, 0, sizeof(seq.truecolor.background.enable));
-    memset(&seq.truecolor.background, 0, sizeof(seq.truecolor.background));
-    memset(&seq.truecolor, 0, sizeof(seq.truecolor));
-
-    memset(&seq, 0, sizeof(seq));
-
-    return seq;
-
-};
 
 #define _apply_property(msg, property, presentation)\
         do {\
