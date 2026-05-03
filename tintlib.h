@@ -26,28 +26,6 @@ typedef enum {
 extern const char* const TL_EscapeCodes[];
 
 typedef enum {
-    TL_CURSOR_CONTROL_HOME = 0,
-    TL_CURSOR_CONTROL_LINE_COLUMN = 1,
-    TL_CURSOR_CONTROL_UP = 2,
-    TL_CURSOR_CONTROL_DOWN = 3,
-    TL_CURSOR_CONTROL_RIGHT = 4,
-    TL_CURSOR_CONTROL_LEFT = 5,
-    TL_CURSOR_CONTROL_COLUMN = 6,
-} TL_CursorControlsIndex;
-extern const char* const TL_CursorControls[];
-
-typedef enum {
-    TL_ERASE_FUNCTION_DISPLAY = 0,
-    TL_ERASE_FUNCTION_CURSOR_END = 1,
-    TL_ERASE_FUNCTION_CURSOR_BEGIN = 2,
-    TL_ERASE_FUNCTION_SCREEN = 3,
-    TL_ERASE_FUNCTION_LINE_CURSOR_END = 4,
-    TL_ERASE_FUNCTION_LINE_CURSOR_BEGIN = 5,
-    TL_ERASE_FUNCTION_LINE = 6,
-} TL_EraseFunctionsIndex;
-extern const char* const TL_EraseFunctions[];
-
-typedef enum {
     TL_GRAPHICS_MODE_RESET = 0,
     TL_GRAPHICS_MODE_BOLD = 1,
     TL_GRAPHICS_MODE_DIM = 2,
@@ -159,8 +137,6 @@ TL_Sequence TL_InitSequence(void);
 #endif
 
 const char* const TL_EscapeCodes[] = {"\033", "\x1B"};
-const char* const TL_CursorControls[] = {"H", "A", "B", "C", "D", "G"};
-const char* const TL_EraseFunctions[] = {"J", "0J", "1J", "2J", "0K", "1K", "2K"};
 const char* const TL_GraphicModes[] = {"0", "1", "2", "3", "4", "5", "7", "8", "9"};
 const char* const TL_IndexedColors[] = {"30", "31", "32", "33", "34", "35", "36", "37", "39", "0", "90", "91", "92", "93", "94", "95", "96", "97" "40", "41", "42", "43", "44", "45", "46", "47", "49", "100", "101", "102", "103", "104", "105", "106", "107"};
 
