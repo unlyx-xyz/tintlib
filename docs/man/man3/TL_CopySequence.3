@@ -1,0 +1,42 @@
+.TH TL_COPYSEQUENCE 3 "2026-05-03" "tintlib v1.2.2" "tintlib manual"
+.SH NAME
+TL_CopySequence, TL_CopySequence3bit4bit, TL_CopySequence8bit, TL_CopySequenceTruecolor,
+TL_CopySequenceDa \- Copy a sequence from source to dest
+.SH LIBRARY
+tintlib library
+.SH SYNOPSIS
+.nf
+.B #define TINT_LIB_IMPLEMENTATION
+.B #include "tintlib.h"
+
+.BI "#define TL_CopySequence(" "src" "," "dest" ") ..."
+.BI "#define TL_CopySequence3bit4bit(" "src" ", " "dest" ") ..."
+.BI "#define TL_CopySequence8bit(" "src" ", " "dest" ") ..."
+.BI "#define TL_CopySequenceTruecolor(" "src" ", " "dest" ") ..." 
+.BI "#define TL_CopySequenceDa(" "src" ", " "dest" ") ..." 
+
+.fi
+.SH DESCRIPTION
+Puts the values from the source unified sequence struct \fBTL_Sequence\fP(3)
+into the dest unified sequence struct\.
+.SH EXAMPLES
+.nf
+#define TINT_LIB_IMPLEMENTATION
+#include "tintlib.h"
+
+TL_Sequence seq = {0};
+seq.da.bold = true;
+seq.da.underline = true;
+seq.da.italic = true;
+seq.c3bit4bit.foreground = ANSI_C1_CSI_SGR_BLACK;
+seq.c3bit4bit.background = ANSI_C2_CSI_SGR_WHITE;
+seq.8bit.foreground = 109;
+seq.8bit.background = -1;
+
+TL_Sequence seq2 = {0};
+
+TL_CopySequencec3bit4bit(seq, &seq2); // Copies just the values from c3bit4bit
+TL_CopySequence(src, &seq2); // Copies the entire struct
+.fi
+.SH SEE ALSO
+.BR "TL_printf" "(3), " "TL_Sequence" "(3), "

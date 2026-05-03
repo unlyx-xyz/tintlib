@@ -1,0 +1,140 @@
+.TH TL_SEQUENCE 3 "2026-05-03" "tintlib v1.2.2" "tintlib manual"
+.SH NAME
+TL_Sequence - unified sequences struct
+.SH LIBRARY
+tintlib library
+.SH SYNOPSIS
+.nf
+.B #define TINT_LIB_IMPLEMENTATION
+.B #include "tintlib.h"
+
+typedef enum {
+    ANSI_C1_CSI_SGR_RESET = 0,
+    ANSI_C1_CSI_SGR_BOLD = 1,
+    ANSI_C1_CSI_SGR_DIM = 2,
+    ANSI_C1_CSI_SGR_ITALIC = 3,
+    ANSI_C1_CSI_SGR_UNDERLINE = 4,
+    ANSI_C1_CSI_SGR_BLINKING = 5,
+    ANSI_C1_CSI_SGR_INVERSE = 6,
+    ANSI_C1_CSI_SGR_HIDDEN = 7,
+    ANSI_C1_CSI_SGR_STRIKETHROUGH = 8,
+} TL_SGRDisplayAttributesIndex;
+
+typedef struct {
+    bool bold;
+    bool dim;
+    bool italic;
+    bool underline;
+    bool blinking;
+    bool inverse;
+    bool hidden;
+    bool strikethrough;
+} TL_SGRDisplayAttributes;
+
+typedef enum {
+    ANSI_C1_CSI_SGR_FG_BLACK = 0,
+    ANSI_C1_CSI_SGR_FG_RED = 1,
+    ANSI_C1_CSI_SGR_FG_GREEN = 2,
+    ANSI_C1_CSI_SGR_FG_YELLOW = 3,
+    ANSI_C1_CSI_SGR_FG_BLUE = 4,
+    ANSI_C1_CSI_SGR_FG_MAGENTA = 5,
+    ANSI_C1_CSI_SGR_FG_CYAN = 6,
+    ANSI_C1_CSI_SGR_FG_WHITE = 7,
+    ANSI_C1_CSI_SGR_FG_DEFAULT = 8,
+    ANSI_C1_CSI_SGR_BG_BLACK = 9,
+    ANSI_C1_CSI_SGR_BG_RED = 10,
+    ANSI_C1_CSI_SGR_BG_GREEN = 11,
+    ANSI_C1_CSI_SGR_BG_YELLOW = 12,
+    ANSI_C1_CSI_SGR_BG_BLUE = 13,
+    ANSI_C1_CSI_SGR_BG_MAGENTA = 14,
+    ANSI_C1_CSI_SGR_BG_CYAN = 15,
+    ANSI_C1_CSI_SGR_BG_WHITE = 16,
+    ANSI_C1_CSI_SGR_BG_DEFAULT = 17,
+    ANSI_C1_CSI_SGR_FG_BRIGHT_BLACK = 18,
+    ANSI_C1_CSI_SGR_FG_BRIGHT_RED = 19,
+    ANSI_C1_CSI_SGR_FG_BRIGHT_GREEN = 20,
+    ANSI_C1_CSI_SGR_FG_BRIGHT_YELLOW = 21,
+    ANSI_C1_CSI_SGR_FG_BRIGHT_BLUE = 22,
+    ANSI_C1_CSI_SGR_FG_BRIGHT_MAGENTA = 23,
+    ANSI_C1_CSI_SGR_FG_BRIGHT_CYAN = 24,
+    ANSI_C1_CSI_SGR_FG_BRIGHT_WHITE = 25,
+    ANSI_C1_CSI_SGR_BG_BRIGHT_BLACK = 26,
+    ANSI_C1_CSI_SGR_BG_BRIGHT_RED = 27,
+    ANSI_C1_CSI_SGR_BG_BRIGHT_GREEN = 28,
+    ANSI_C1_CSI_SGR_BG_BRIGHT_YELLOW = 29,
+    ANSI_C1_CSI_SGR_BG_BRIGHT_BLUE = 30,
+    ANSI_C1_CSI_SGR_BG_BRIGHT_MAGENTA = 31,
+    ANSI_C1_CSI_SGR_BG_BRIGHT_CYAN = 32,
+    ANSI_C1_CSI_SGR_BG_BRIGHT_WHITE = 33,
+} TL_SGRColors3Bit4BitIndex;
+
+typedef struct {
+    TL_SGRColors3Bit4BitIndex foreground;
+    TL_SGRColors3Bit4BitIndex background;
+} TL_SGRColors3Bit4Bit;
+
+typedef struct {
+    int foreground;
+    int background;
+} TL_SGRColors8Bit;
+
+typedef struct {
+    bool enable;
+    uint8_t r;
+    uint8_t g;
+    uint8_t b;
+} TL_RGB;
+
+typedef struct {
+    TL_RGB foreground;
+    TL_RGB background;
+} TL_SGRColorsTruecolor;
+
+typedef struct {
+    TL_SGRDisplayAttributes da;
+    TL_SGRColors3Bit4Bit c3bit4bit;
+    TL_SGRColors8Bit c8bit;
+    TL_SGRColorsTruecolor ctruecolor;
+} TL_Sequence;
+
+.fi
+.SH DESCRIPTION
+The format used in the unified sequences struct \fBTL_Sequence\fP
+follows the ANSI escape codes\. And grants three ways of saving
+color settings and one way of saving a Display Attribute
+setting\.
+.PP
+.I da
+.in +4n
+Display Attributes element, saves the Display Attribute setting
+of the sequence\. You can enable several attributes if you want\.
+It's of type \fBTL_SGRDisplayAttributes\fP\.
+.ni
+.PP
+.I c3bit4bit
+.in +4n
+3bit/4bit colors element, saves the color setting for 3bit/4bit
+colors, you must specify the foreground and background color\.
+.ni
+.PP
+.I c8bit
+.in +4n
+Same as 3bit/4bit colors element, but you must specify a value
+in the range: [0\-255]\ for both foreground and background\.
+if you specify the value "-1" it disables the foreground or 
+background depending in which of those two you put that value\.
+You can disable both them, but that doesn't make any fucking
+sense bruh.
+.ni
+.PP
+.I ctruecolor
+.in +4n
+truecolor colors element, same as c8bit you can disable/enable
+both background and foreground color setting\. Specify their values
+by selecting one or both of them and putting a value between 0 \- 255 in
+their elements: r, g, b\.
+.ni
+.PP
+.SH SEE ALSO
+.BR "TL_printfc" "(3), " "TL_CopySequence" "(3), "
+

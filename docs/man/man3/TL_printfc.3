@@ -1,0 +1,92 @@
+.TH TL_PRINTFC 3 "2026-05-01" "tintlib v1.3.0" "tintlib manual"
+.SH NAME
+TL_printfc3bit4bit, TL_printfc8bit, TL_printfcTruecolor, TL_printfDa, 
+TL_fprintfc3bit4bit, TL_fprintfc8bit, TL_fprintfcTruecolor,
+TL_fprintfDa, \- formatted output conversion with ANSI escape codes support
+.SH LIBRARY
+tintlib library
+.SH SYNOPSIS
+.nf
+.B #define TINT_LIB_IMPLEMENTATION
+.B #include "tintlib.h"
+
+.BI "#define TL_printfc3bit4bit(TL_Sequence " "sequence" ", " "..." ")"
+.BI "#define TL_printfc8bit(TL_Sequence " "sequence" ", " "..." ")"
+.BI "#define TL_printfcTruecolor(TL_Sequence " "sequence" ", " "..." ")"
+.BI "#define TL_printfDa(TL_Sequence " "sequence" ", " "..." ")"
+
+.BI "#define TL_fprintfc3bit4bit(FILE* " "stream" ", TL_Sequence " "sequence" ", " "..." ")"
+.BI "#define TL_fprintfc8bit(FILE* " "stream" ", TL_Sequence " "sequence" ", " "..." ")"
+.BI "#define TL_fprintfcTruecolor(FILE* " "stream" ", TL_Sequence " "sequence" ", " "..." ")"
+.BI "#define TL_fprintfDa(FILE* " "stream" ", TL_Sequence " "sequence" ", " "..." ")"
+
+.fi
+.SH DESCRIPTION
+The \fBTL_printfc()\fP macros family are a wrapper of two functions
+of the \fBprintf\fP(3) functions family: \fBvprintf\fP(3) and \fBvfprintf\fP(3) 
+with ANSI escape codes support coming from \fBTL_Sequence\fP(3)
+.SH RETURN VALUE
+Same as the already mentioned \fBprintf\fP(3) functions family, these 
+macros return the number of bytes printed.
+.SH ERRORS
+None.
+.SH EXAMPLES
+.B TL_printfc3bit4bit():
+.nf
+.in +4n
+#define TINT_LIB_IMPLEMENTATION
+#include "tintlib.h"
+
+TL_Sequence seq = {0};
+seq.c3bit4bit.foreground = ANSI_C1_CSI_SGR_FG_RED // RED FOREGROUND
+seq.c3bit4bit.background = ANSI_C1_CSI_SGR_BG_DEFAULT; // DEFAULT BACKGROUND
+TL_printfc3bit4bit(seq, "Hello %s!", "tintlib");
+.in
+.fi
+.PP
+.B TL_printfc8bit():
+.nf
+.in +4n
+#define TINT_LIB_IMPLEMENTATION
+#include "tintlib.h"
+
+TL_Sequence seq = {0};
+seq.c8bit.foreground = 196; // RED
+seq.c8bit.background = -1; // BACKGROUND DISABLED
+TL_printfc8bit(seq, "Hello %s!", "tintlib");
+.in
+.fi
+.PP
+.B TL_printfcTruecolor():
+.nf
+.in +4n
+#define TINT_LIB_IMPLEMENTATION
+#include "tintlib.h"
+
+TL_Sequence seq = {0};
+TL_RGB red_fg = {.enable = true, .r = 255, .g = 0, .b = 0}; // RED
+TL_RGB black_bg = {.enable = false, .r = 0, .g = 0,. b = 0}; // BLACK BACKGROUND DISABLED
+seq.ctruecolor.foreground = red_fg;
+seq.ctruecolor.background = black_bg;
+TL_printfcTruecolor(seq, "Hello %s!", "tintlib");
+.in
+.fi
+.PP
+.B TL_printfcDa():
+.nf
+.in +4n
+#define TINT_LIB_IMPLEMENTATION
+#include "tintlib.h"
+
+TL_Sequence seq = {0};
+seq.da.bold = true; // BOLD ENABLED
+seq.da.italic = true; // ITALIC ENABLED
+seq.da.underline = true; // UNDERLINE ENABLED
+TL_printfcTruecolor(seq, "Hello %s!", "tintlib");
+.in
+.fi
+.PP
+.B TL_fprintfc3bit4bit(), TL_fprintfc8bit(), TL_fprintfcTruecolor(), TL_fprintfDa() 
+\- are exactly the same but you just specify in the first argument the stream\.
+.SH SEE ALSO
+.BR "TL_Sequence" "(3), " "printf" "(3), "
