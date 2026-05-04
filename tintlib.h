@@ -189,7 +189,7 @@ static inline int _tl_build_sequence(FILE *stream, _tl_sequence_type type, TL_Se
     strcat(msg_seq, "m");
 
     char msg[2048] = {0};
-    snprintf(msg, sizeof(msg), "%s%s%s[0m", msg_seq, fmt, TL_ANSIC0ESC[TINT_LIB_ESCAPE_CODE]);
+    snprintf(msg, sizeof(msg), "%s%s%s[0m", msg_seq, fmt, TL_ANSIC0ESC[TINT_LIB_C0_ESC]);
 
     va_list args;
     va_start(args, fmt);
