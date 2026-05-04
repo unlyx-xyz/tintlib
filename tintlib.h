@@ -1,7 +1,7 @@
 /* 
 Tint Library project - Made by: unlyx.xyz
 04-26-2026
-Version: 1.3.0
+Version: 1.3.1
 */
 
 #ifndef TINT_LIB_H
