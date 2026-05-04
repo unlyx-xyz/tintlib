@@ -12,6 +12,6 @@ jobs:
       - name: Code checkout
         uses: actions/checkout@v4
       - name: Compile tests
-        uses: gcc test/test.c -o testbin
+        run: gcc test/test.c -o testbin
       - name: Run tests
-        uses: ./testbin
+        run: ./testbin
