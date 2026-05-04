@@ -153,14 +153,14 @@ static inline int _tl_build_sequence(FILE *stream, _tl_sequence_type type, TL_Se
     strcpy(msg_seq, TL_ANSIC0ESC[TINT_LIB_C0_ESC]);
     strcat(msg_seq, "[");
 
-    _apply_property(msg_seq, sequence.da.bold, TL_SGRDisplayAttributesPS[TL_GRAPHICS_MODE_BOLD]);
-    _apply_property(msg_seq, sequence.da.dim, TL_SGRDisplayAttributesPS[TL_GRAPHICS_MODE_DIM]);
-    _apply_property(msg_seq, sequence.da.italic, TL_SGRDisplayAttributesPS[TL_GRAPHICS_MODE_ITALIC]);
-    _apply_property(msg_seq, sequence.da.underline, TL_SGRDisplayAttributesPS[TL_GRAPHICS_MODE_UNDERLINE]);
-    _apply_property(msg_seq, sequence.da.blinking, TL_SGRDisplayAttributesPS[TL_GRAPHICS_MODE_BLINKING]);
-    _apply_property(msg_seq, sequence.da.inverse, TL_SGRDisplayAttributesPS[TL_GRAPHICS_MODE_INVERSE]);
-    _apply_property(msg_seq, sequence.da.hidden, TL_SGRDisplayAttributesPS[TL_GRAPHICS_MODE_HIDDEN]);
-    _apply_property(msg_seq, sequence.da.strikethrough, TL_SGRDisplayAttributesPS[TL_GRAPHICS_MODE_STRIKETHROUGH]);
+    _apply_property(msg_seq, sequence.da.bold, TL_SGRDisplayAttributesPS[ANSI_C1_CSI_SGR_BOLD]);
+    _apply_property(msg_seq, sequence.da.dim, TL_SGRDisplayAttributesPS[ANSI_C1_CSI_SGR_DIM]);
+    _apply_property(msg_seq, sequence.da.italic, TL_SGRDisplayAttributesPS[ANSI_C1_CSI_SGR_ITALIC]);
+    _apply_property(msg_seq, sequence.da.underline, TL_SGRDisplayAttributesPS[ANSI_C1_CSI_SGR_UNDERLINE]);
+    _apply_property(msg_seq, sequence.da.blinking, TL_SGRDisplayAttributesPS[ANSI_C1_CSI_SGR_BLINKING]);
+    _apply_property(msg_seq, sequence.da.inverse, TL_SGRDisplayAttributesPS[ANSI_C1_CSI_SGR_INVERSE]);
+    _apply_property(msg_seq, sequence.da.hidden, TL_SGRDisplayAttributesPS[ANSI_C1_CSI_SGR_HIDDEN]);
+    _apply_property(msg_seq, sequence.da.strikethrough, TL_SGRDisplayAttributesPS[ANSI_C1_CSI_SGR_STRIKETHROUGH]);
 
     switch(type) {
         case ANSI_C1_CSI_SGR_3BIT4BIT:
